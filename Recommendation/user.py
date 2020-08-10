@@ -1,31 +1,32 @@
 from bokeh.core.json_encoder import pd
+from . import get_logger, freeze, subdict
+from sklearn import preprocessing
+_LOG = get_logger('Recsys')
 
 
-def process_user_info ():
+def process_user_info():
     HPs = pd.read_excel('/Users/bekyilma/Documents/Projects/vr/Rec/Alberto/Alberto.xlsx', index_col=0)
     HPs = HPs[['How likely are you interested in visiting popular paintings?',
-           'How likely are you interested in visiting diverse content?',
-           'How tolerant are you to crowd in exhibition areas?',
-           'How tolerant are you towards walking in a museum?']]
+               'How likely are you interested in visiting diverse content?',
+               'How tolerant are you to crowd in exhibition areas?',
+               'How tolerant are you towards walking in a museum?']]
 
     HPs = HPs.transpose()
     HPs.columns = ['Values']
- #Normalize Hyperparameters
+    # Normalize Hyperparameters
     x = HPs[['Values']].values.astype(float)
     min_max_scaler = preprocessing.MinMaxScaler()
     x_scaled = min_max_scaler.fit_transform(x)
     df_normalized = pd.DataFrame(x_scaled)
 
+    HPs['norm_Values'] = df_normalized.values
 
-    HPs['norm_Values'] =df_normalized.values
+    # Translate Hyperparameters
 
-    #Translate Hyperparameters
-
-    Beta = HPs.at['How likely are you interested in visiting popular paintings?','norm_Values']
-    Epsilon = HPs.at['How likely are you interested in visiting diverse content?','norm_Values']
-    LAMBDA = HPs.AT['How tolerant are you towards walking in a museum?','norm_Values']
-    Crowd_tolerance = HPs.at['How tolerant are you to crowd in exhibition areas?','norm_Values']
-
+    Beta = HPs.at['How likely are you interested in visiting popular paintings?', 'norm_Values']
+    Epsilon = HPs.at['How likely are you interested in visiting diverse content?', 'norm_Values']
+    LAMBDA = HPs.at['How tolerant are you towards walking in a museum?', 'norm_Values']
+    Crowd_tolerance = HPs.at['How tolerant are you to crowd in exhibition areas?', 'norm_Values']
 
     # -------------- Import preference information (weights) -------------- #
     df = pd.read_excel('/Users/bekyilma/Documents/Projects/vr/Rec/Alberto/Alberto.xlsx', index_col=0)
@@ -47,8 +48,6 @@ def process_user_info ():
     df1.dropna(subset=['a'], inplace=True)
     df1['weights'] = df1['a'].astype('int')
 
-
-
     # Create x, where x the 'scores' column's values as floats
     x = df1[['weights']].values.astype(float)
 
@@ -67,8 +66,6 @@ def process_user_info ():
     # wrap preference info as a dictionary
     preference_dict = dict(zip(selected_images_keys_list, weights))
 
+    _LOG.debug('Parameters {} {} {} {} {}'.format(Beta, Epsilon, LAMBDA, Crowd_tolerance, preference_dict))
 
-
-    dir_path = '/Users/bekyilma/Documents/Visual_art-recommender/ng_images/'
-
-    return Beta, Epsilon,LAMBDA,Crowd_tolerance, preference_dict
+    return Beta, Epsilon, LAMBDA, Crowd_tolerance, preference_dict
