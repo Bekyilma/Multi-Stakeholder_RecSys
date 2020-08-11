@@ -73,7 +73,6 @@ from . import get_logger
 
 _LOG = get_logger('Recsys')
 
-
 pd.options.display.max_colwidth = 50
 path_to_model = '/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/models/lda.model'
 path_to_cos_mat = '/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/matrices/lda/cosine-mat.npy'

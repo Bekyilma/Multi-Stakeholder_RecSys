@@ -5,7 +5,7 @@ _LOG = get_logger('Recsys')
 
 
 def process_user_info():
-    HPs = pd.read_excel('/Users/bekyilma/Documents/Projects/vr/Rec/Alberto/Alberto.xlsx', index_col=0)
+    HPs = pd.read_excel('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/Alberto.xlsx', index_col=0)
     HPs = HPs[['How likely are you interested in visiting popular paintings?',
                'How likely are you interested in visiting diverse content?',
                'How tolerant are you to crowd in exhibition areas?',
@@ -66,6 +66,6 @@ def process_user_info():
     # wrap preference info as a dictionary
     preference_dict = dict(zip(selected_images_keys_list, weights))
 
-    _LOG.debug('Parameters {} {} {} {} {}'.format(Beta, Epsilon, LAMBDA, Crowd_tolerance, preference_dict))
+    _LOG.debug('Parameters {}k {} {} {} {}'.format(Beta, Epsilon, LAMBDA, Crowd_tolerance, preference_dict))
 
     return Beta, Epsilon, LAMBDA, Crowd_tolerance, preference_dict
