@@ -40,10 +40,30 @@ def run():
     Recommendation_list.to_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/Recommendations/LDA_recommendations.csv', index=False)
 
 
+    Recommendation.painting.generate_stories()
+
+    #Retrive Recommendation_list_df with stories
+
+    Recommendation_list = pd.read_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/Recommendations/Stories_+_LDA_recommendations.csv')
+
+    Recommendation_list['Score_AG (P)'] = Recommendation_list['Score (P,U)'] + Recommendation_list['Score (P,pop)'].apply(lambda x: x * Beta)
 
 
+            # Normalize Score_AG (P)
 
+    nm = Recommendation_list[['Score_AG (P)']].values.astype(float)
+    min_max_scaler = preprocessing.MinMaxScaler()
+    nm_scaled = min_max_scaler.fit_transform(nm)
+    df_normalized = pd.DataFrame(nm_scaled)
 
+    Recommendation_list['Score_AG (P)'] = df_normalized.values
+
+                 #Baseline Recommender
+
+    Policy_I = Recommendation_list.sort_values('Score_AG (P)', ascending=False)
+
+                #Dump Baseline recommendation
+    Policy_I.to_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/Recommendations/Policy_I_recommendations.csv', index= False)
     print(Recommendation_list)
 
    # _LOG.debug('Dataset = {LDA_recommendation}'.format(Recommendation_list))
