@@ -58,12 +58,43 @@ def run():
 
     Recommendation_list['Score_AG (P)'] = df_normalized.values
 
+
+    #Estimate visiting time based on Visiting style (User provided)
+
+    Time_estimator = pd.read_excel('/Users/bekyilma/Documents/Projects/vr/Rec/Alberto/Alberto.xlsx', index_col=0)
+    #Time_estimator.set_index('Response ID')
+    #Visitng_style = Time_estimator[['Which of the following best describes your museum visiting style?']]
+    Visitng_style = Time_estimator.at[ 40 , 'Which of the following best describes your museum visiting style?']
+
+    print("THIS IS VISITING STYLE", Visitng_style)
+
+    if Visitng_style == 'I frequently change the direction of my tour, usually avoiding empty space. I see almost all exhibits, but times vary between exhibits.':
+        #The Butterfly visitor:
+        Recommendation_list['Time_est'] = np.random.randint(15, 60, size=len(Recommendation_list))
+        
+    elif Visitng_style == 'I walk mostly through empty space making just a few stops and see most of the exhibits but for a short time.':
+        #The Fish visitor: 
+        Recommendation_list['Time_est'] = np.random.randint(15, 60, size=len(Recommendation_list))
+
+    elif Visitng_style == 'I see only exhibits I am  interested in. I walk through empty space and stays for a long time only in front of selected exhibits.':
+        # The Grasshopper visitor:
+        Recommendation_list['Time_est'] = np.random.randint(15, 60, size=len(Recommendation_list))
+
+    elif Visitng_style == 'I spend a long time observing all exhibits and moves close to the walls and the exhibits avoiding empty space.':
+        # The Ant visitor:
+        Recommendation_list['Time_est'] = np.random.randint(15, 60, size=len(Recommendation_list))
+
+
+
                  #Baseline Recommender
 
     Policy_I = Recommendation_list.sort_values('Score_AG (P)', ascending=False)
 
                 #Dump Baseline recommendation
+
     Policy_I.to_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/Recommendations/Policy_I_recommendations.csv', index= False)
+
+
     print(Recommendation_list)
 
    # _LOG.debug('Dataset = {LDA_recommendation}'.format(Recommendation_list))
