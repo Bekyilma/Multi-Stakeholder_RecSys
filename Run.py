@@ -24,6 +24,8 @@ def run():
         Rated_painting_list.append(k)
         WEAIGHTS.append(v)
 
+    T_ava = 3602
+    #TODO #load from data
 
     Recommendation_list = Recommendation.LDA_recommender.recommend_paintings(painting_df, Rated_painting_list, WEAIGHTS, cos_mat, 2367)
 
@@ -95,9 +97,11 @@ def run():
     Policy_I.to_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/Recommendations/Policy_I_recommendations.csv', index= False)
 
 
-    print(Recommendation_list)
+    #Multi-Objective recommendation
 
-   # _LOG.debug('Dataset = {LDA_recommendation}'.format(Recommendation_list))
+    Recommendation.poi_problem.ms_recommender(Epsilon,T_ava)
+
+
 
 
 
