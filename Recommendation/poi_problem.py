@@ -601,42 +601,102 @@ def ms_recommender(Epsilon,T_ava):
     model = gp.Model("Painting_recommender")
 
     x = model.addVars(painting, vtype=GRB.BINARY, name="painting")
-    # wom = model.addVar(len())
+
+    # Auxilary variables to lineraize womens_LIves_paint
+    t1 = model.addVar(name='T1')
+    w1 = model.addVar(name='w1')
+
+    model.addConstr(w1 == gp.quicksum(x[a] * Wom_count[a] for a in Womens_Lives_paint))
+    model.addGenConstrPow(w1, t1, 0.5, "square root of w1")
+
+    # Auxilary variables to lineraize Water_paint
+    t2 = model.addVar(name='T2')
+    w2 = model.addVar(name='w2')
+
+    model.addConstr(w2 == gp.quicksum(x[a] * Wat_count[a] for a in Water_paint))
+    model.addGenConstrPow(w2, t2, 0.5, "square root of w2")
+
+    # Auxilary variables to lineraize Contemporary
+    t3 = model.addVar(name='T3')
+    w3 = model.addVar(name='w3')
+
+    model.addConstr(w3 == gp.quicksum(x[a] * Contemporary_count[a] for a in Contemporary))
+    model.addGenConstrPow(w3, t3, 0.5, "square root of w3")
+
+    # Auxilary variables to lineraize Women_Artists
+    t4 = model.addVar(name='T4')
+    w4 = model.addVar(name='w4')
+
+    model.addConstr(w4 == gp.quicksum(x[a] * WomenART_count[a] for a in Women_Artists))
+    model.addGenConstrPow(w4, t4, 0.5, "square root of w4")
+
+    # Auxilary variables to lineraize Monsters_paint
+    t5 = model.addVar(name='T5')
+    w5 = model.addVar(name='w5')
+
+    model.addConstr(w5 == gp.quicksum(x[a] * Monsters_count[a] for a in Monsters_paint))
+    model.addGenConstrPow(w5, t5, 0.5, "square root of w5")
+
+    # Auxilary variables to lineraize Migration_paint
+    t6 = model.addVar(name='T6')
+    w6 = model.addVar(name='w6')
+
+    model.addConstr(w6 == gp.quicksum(x[a] * Migration_count[a] for a in Migration_paint))
+    model.addGenConstrPow(w6, t6, 0.5, "square root of w6")
+
+    # Auxilary variables to lineraize Death_paint
+    t7 = model.addVar(name='T7')
+    w7 = model.addVar(name='w7')
+
+    model.addConstr(w7 == gp.quicksum(x[a] * Death_count[a] for a in Death_paint))
+    model.addGenConstrPow(w7, t7, 0.5, "square root of w7")
+
+    # Auxilary variables to lineraize Battles_paint
+    t8 = model.addVar(name='T8')
+    w8 = model.addVar(name='w8')
+
+    model.addConstr(w8 == gp.quicksum(x[a] * Battles_count[a] for a in Battles_paint))
+    model.addGenConstrPow(w8, t8, 0.5, "square root of w8")
+
+    # Auxilary variables to lineraize Warfare_paint
+    t9 = model.addVar(name='T9')
+    w9 = model.addVar(name='w9')
+
+    model.addConstr(w9 == gp.quicksum(x[a] * Warfare_count[a] for a in Warfare_paint))
+    model.addGenConstrPow(w9, t9, 0.5, "square root of w9")
+
+    # Auxilary variables to lineraize Uncategorised_paint
+    t10 = model.addVar(name='T10')
+    w10 = model.addVar(name='w10')
+
+    model.addConstr(w10 == gp.quicksum(x[a] * Uncategorised_count[a] for a in Uncategorised_paint))
+    model.addGenConstrPow(w10, t10, 0.5, "square root of w10")
+
+    # addGenConstrPow ( xvar, yvar, a, name="", options="" )
+
+    model.update()
 
     model.addConstr(gp.quicksum(x[a] * PTime[a] for a in painting) <= T_ava, name="time_Constraint")
 
-    # model.setObjective((1-Epsilon) * gp.quicksum(x[a]*score[a] for a in painting)
-    # + Epsilon *  gp.quicksum(PCount[a] for a in story_group["Womens_Lives"]), GRB.MAXIMIZE)
-
     model.setObjective((1 - Epsilon) * gp.quicksum(x[a] * score[a] for a in painting)
-                       + Epsilon * (gp.quicksum(x[a] * Wom_count[a] for a in Womens_Lives_paint)
-                                    + gp.quicksum(x[a] * Wat_count[a] for a in Water_paint)
-                                    + gp.quicksum(x[a] * Contemporary_count[a] for a in Contemporary)
-                                    + gp.quicksum(x[a] * WomenART_count[a] for a in Women_Artists)
-                                    + gp.quicksum(x[a] * Monsters_count[a] for a in Monsters_paint)
-                                    + gp.quicksum(x[a] * Migration_count[a] for a in Migration_paint)
-                                    + gp.quicksum(x[a] * Death_count[a] for a in Death_paint)
-                                    + gp.quicksum(x[a] * Battles_count[a] for a in Battles_paint)
-                                    + gp.quicksum(x[a] * Warfare_count[a] for a in Warfare_paint)
-                                    + gp.quicksum(x[a] * Uncategorised_count[a] for a in Uncategorised_paint)),
-                       GRB.MAXIMIZE)
+                       + Epsilon * (t1 + t2 + t3 + t4 + t5 + t6 + t7 + t8 + t9 + t10), GRB.MAXIMIZE)
 
     model.optimize()
 
     if model.status == GRB.Status.OPTIMAL:
-        print('Optimal objective: %g' % model.objVal)
+     print('Optimal objective: %g' % model.objVal)
     elif model.status == GRB.Status.INF_OR_UNBD:
-        print('Model is infeasible or unbounded')
-        exit(0)
+     print('Model is infeasible or unbounded')
+     exit(0)
     elif model.status == GRB.Status.INFEASIBLE:
-        print('Model is infeasible')
-        exit(0)
+     print('Model is infeasible')
+     exit(0)
     elif model.status == GRB.Status.UNBOUNDED:
-        print('Model is unbounded')
-        exit(0)
+     print('Model is unbounded')
+     exit(0)
     else:
-        print('Optimization ended with status %d' % model.status)
-        exit(0)
+     print('Optimization ended with status %d' % model.status)
+     exit(0)
 
     """Display optimal values of decision variables
     
@@ -654,9 +714,9 @@ def ms_recommender(Epsilon,T_ava):
     variable_value = []
 
     for v in model.getVars():
-        if v.x > 1e-6:
-            variable_name.append(v.varName)
-            variable_value.append(v.x)
+     if v.varName.startswith("paint") and v.x > 1e-6:
+      variable_name.append(v.varName)
+      variable_value.append(v.x)
     df = pd.DataFrame({'variable': variable_name, 'value': variable_value})
     for rownum, row in df.iterrows():
         value = re.findall(r'(?<=\[)(.*?)(?=\])', row['variable'])
