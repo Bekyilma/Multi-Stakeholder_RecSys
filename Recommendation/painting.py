@@ -5,7 +5,7 @@ def generate_stories():
 
                         # This module generate data related to paintings (curated stories) and encode data for Gurobi
 
-    Recommendation_list = pd.read_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/Recommendations/LDA_recommendations.csv')
+    Recommendation_list = pd.read_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Results/LDA_recommendations.csv')
 
    # stories = pd.read_json('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/datasets/stories.json')
 
@@ -96,6 +96,8 @@ def generate_stories():
     Recommendation_list['Score (P,pop)'] = ind
 
 
+
+
                         # Dump recommendation_df with stories and new scores
-    Recommendation_list.to_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/Recommendations/Stories_+_LDA_recommendations.csv', index=False)
+    Recommendation_list.to_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Results/Stories_+_LDA_recommendations.csv', index=False)
 

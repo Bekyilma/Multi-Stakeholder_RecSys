@@ -39,14 +39,14 @@ def run():
 
     #Dump_LDA recommendations_df
 
-    Recommendation_list.to_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/Recommendations/LDA_recommendations.csv', index=False)
+    Recommendation_list.to_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Results/LDA_recommendations.csv', index=False)
 
 
     Recommendation.painting.generate_stories()
 
     #Retrive Recommendation_list_df with stories
 
-    Recommendation_list = pd.read_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/Recommendations/Stories_+_LDA_recommendations.csv')
+    Recommendation_list = pd.read_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Results/Stories_+_LDA_recommendations.csv')
 
     Recommendation_list['Score_AG (P)'] = Recommendation_list['Score (P,U)'] + Recommendation_list['Score (P,pop)'].apply(lambda x: x * Beta)
 
@@ -95,15 +95,16 @@ def run():
 
                 #Dump Baseline recommendation
 
-    Policy_I.to_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/Recommendations/Policy_I_recommendations.csv', index= False)
+    Policy_I.to_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Results/Policy_I_recommendations.csv', index= False)
 
 
     #Multi-Objective recommendation
 
-    Recommendation.poi_problem.ms_recommender(Epsilon,T_ava)
+    Recomended_PIOs_MO = Recommendation.poi_problem.ms_recommender(Epsilon,T_ava)
 
-
-
+    Recomended_PIOs_MO.to_csv(
+        '/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Results/MO_recommendations.csv',
+        index=False)
 
 
 def main():

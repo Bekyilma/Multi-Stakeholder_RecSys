@@ -5,7 +5,9 @@ import itertools
 import re
 
 def ms_recommender(Epsilon,T_ava):
-    Recommendation_list = pd.read_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/Recommendations/Policy_I_recommendations.csv')
+
+
+    Recommendation_list = pd.read_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Results/Policy_I_recommendations.csv')
 
     # parameters
 
@@ -723,12 +725,14 @@ def ms_recommender(Epsilon,T_ava):
         df.loc[rownum, 'variable'] = str(value[0])
     Optimal_recommendations_MO = df['variable'].tolist()
 
-    Recomended_PIOs_MO = Recommendation_list[Recommendation_list['Paintings'].isin(Optimal_recommendations_MO)]
+    Recomended_PIOs_MO  = Recommendation_list[Recommendation_list['Paintings'].isin(Optimal_recommendations_MO)]
     Total_est_time = Recomended_PIOs_MO['Time_est'].sum()
     remaining_time = T_ava - Total_est_time
     print('Total available time =', T_ava)
     print('Total estimated time =', Total_est_time)
     print('Remaining time  =', remaining_time)
+    
+       # Sort by score
+    Recomended_PIOs_MO = Recomended_PIOs_MO.sort_values('Score_AG (P)', ascending=False)
 
-    Recomended_PIOs_MO.to_csv('/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Data/Recommendations/MO_recommendations.csv', index= False)
-
+    return Recomended_PIOs_MO
