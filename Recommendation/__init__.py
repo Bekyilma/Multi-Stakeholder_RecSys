@@ -2,13 +2,10 @@ from . import utils
 from .utils import *
 
 from . import LDA_recommender
-from . LDA_recommender import *
+from .LDA_recommender import *
 
 from . import painting
-from . painting import *
-
-#from . import synthetic
-#from .synthetic import *
+from .painting import *
 
 from . import poi_problem
 from .poi_problem import *
