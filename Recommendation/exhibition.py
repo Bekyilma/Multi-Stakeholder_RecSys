@@ -11,6 +11,18 @@ import re
 
 
 # Path recommender
-def path_recommender (Cr_t, LAMBDA, T_ava, Cr_s)
+def path_recommender (Cr_t, LAMBDA, T_ava, Cr_s):
 
-#Cr_s is crowd size dictionary ... real time croed size per venue
+    #Cr_s is crowd size dictionary ... real time croed size per venue
+
+
+    #Load Gurobi recomended POIs
+    Recomended_POIs = pd.read_csv( '/Users/bekyilma/Documents/Projects/vr/Multi-Stakeholder_Recommendation/Results/MO_recommendations.csv')
+
+
+    # project recommendation to venues
+    ROOM_SCORE = Recomended_POIs.groupby(['Room_ID'])['Score_AG (P)', 'Time_est'].agg('sum')
+
+    ROOM_SCORE = ROOM_SCORE.sort_values(by=['Score_AG (P)'], ascending=False)
+    ROOM_SCORE['Room_Number'] = ROOM_SCORE.index
+    ROOM_SCORE = ROOM_SCORE.rename({'Score_AG (P)': 'Score(R)'}, axis=1)
