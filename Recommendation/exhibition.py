@@ -26,3 +26,10 @@ def path_recommender (Cr_t, LAMBDA, T_ava, Cr_s):
     ROOM_SCORE = ROOM_SCORE.sort_values(by=['Score_AG (P)'], ascending=False)
     ROOM_SCORE['Room_Number'] = ROOM_SCORE.index
     ROOM_SCORE = ROOM_SCORE.rename({'Score_AG (P)': 'Score(R)'}, axis=1)
+
+
+    #Import floor pan and compute distance between venues.
+
+    Ng = pd.read_json(
+        r'resources/datasets/ng-map-master-f57523e18f42d1565bace0a7f78effd00dc8f767/floors/floor-2/floor-2_rooms.geojson')
+    json_normalize(Ng_map['features'])
