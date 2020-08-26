@@ -33,3 +33,14 @@ def path_recommender (Cr_t, LAMBDA, T_ava, Cr_s):
     Ng = pd.read_json(
         r'resources/datasets/ng-map-master-f57523e18f42d1565bace0a7f78effd00dc8f767/floors/floor-2/floor-2_rooms.geojson')
     json_normalize(Ng_map['features'])
+
+
+    # We have Top x Pintings that are distributed in 17 rooms
+
+    # The Path recommender needs to solve for N rooms:
+
+    #(i) That give a total maximum score _Max_   $\sum_{K=1}^{N}$ Score (_R_$_{K}$)
+
+    #(ii) The travel distance between consequtive rooms should be minimal _Min_   $\sum_{K=1}^{N}$ _dist_ (_R_$_{K}$, _R_$_{K+1}$)  Such that
+
+    #The total estimated time for visiting and travel should not exceed the available time of the visitor. $\sum_{K=1}^{N}$ _T_$_{v}$(_R_$_{K}$)  + _T_(_R_$_{K}$, _R_$_{K+1}$) $\leq $ _T_$_{ava}$
