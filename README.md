@@ -83,6 +83,13 @@ This code  works on Python 3.5 or later.
 * * *
 # Usage
 
+## Running the  experiments
+
+Run the `Run.sh` runner script from a terminal, like this:
+```
+$ bash Run.sh
+```
+
 #### TODO
 
 Citation
