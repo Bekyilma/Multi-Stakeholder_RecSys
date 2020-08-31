@@ -1,4 +1,4 @@
-# Personalisation in Cyber-Physical-Social Systems: A Multi-stakeholder aware Recommendation and Guidance in Exhibition Areas
+# Personalisation in Cyber-Physical-Social Systems: A Multi-stakeholder aware Recommendation and Guidance
 
 <p align="center">
 <img width="1100"  src="/figures/cover.jpg"/> 
