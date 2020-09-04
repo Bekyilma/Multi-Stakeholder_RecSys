@@ -92,6 +92,8 @@ $ bash Run.sh
 
 #### TODO
 
+Add visualiser 
+
 Citation
 ========
 
