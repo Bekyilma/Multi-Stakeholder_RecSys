@@ -1,4 +1,4 @@
-# Personalisation in Cyber-Physical-Social Systems: A Multistakeholder aware Recommendation & Guidance in National Gallery
+# Personalisation in Cyber-Physical-Social Systems: A Multistakeholder aware Recommendation and Guidance in National Gallery
 
 <p align="center">
 <img width="1100"  src="/figures/cover.jpg"/> 
