@@ -97,5 +97,5 @@ Citation
 
 When you use this work or method for your research, we ask you to cite the following publication:
 
-[Bereket Abera Yilma, Yannick Naudet and Hervé Panetto " Personalisation in Cyber-Physical-Social Systems: A Multi-stakeholder aware Recommendation and Guidance,". In the proceedings of the 29th ACM Conference on User Modeling, Adaptation and Personalization(UMAP ’21)](https://dl.acm.org/doi/abs/10.1145/3450613.3456847)
+[Bereket Abera Yilma, Yannick Naudet and Hervé Panetto "Personalisation in Cyber-Physical-Social Systems: A Multi-stakeholder aware Recommendation and Guidance," In the proceedings of the 29th ACM Conference on User Modeling, Adaptation and Personalization(UMAP ’21)](https://dl.acm.org/doi/abs/10.1145/3450613.3456847)
 
