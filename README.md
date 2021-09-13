@@ -90,14 +90,12 @@ Run the `Run.sh` runner script from a terminal, like this:
 $ bash Run.sh
 ```
 
-#### TODO
 
-Add visualiser 
 
 Citation
 ========
 
 When you use this work or method for your research, we ask you to cite the following publication:
 
-[Bereket Abera Yilma, Yannick Naudet and Hervé Panetto (2020), Personalisation in Cyber-Physical-Social Systems: A Multi-stakeholder awareRecommendation and Guidance in Exhibition Areas doi:----](link to paper)
+[Bereket Abera Yilma, Yannick Naudet and Hervé Panetto (2020), Personalisation in Cyber-Physical-Social Systems: A Multi-stakeholder awareRecommendation and Guidance in Exhibition Areas doi:10.1145/3450613.3456847](https://dl.acm.org/doi/abs/10.1145/3450613.3456847)
 
