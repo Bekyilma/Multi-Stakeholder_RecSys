@@ -5,7 +5,7 @@
 </p>
 
 
-# ABSTRACT
+# Abstract
 <p align="justify">
 The evolution of smart devices has led to the transformation of many physical spaces to the so-called smart environments collectively termed as Cyber-Physical-Social System (CPSS). In CPSS users co-exist with different stakeholders influencing each other while being influenced by different environmental factors. Additionally, these environments often have their own desired goals and corresponding set of rules in place expecting people to behave in certain ways. Hence, in such settings classical approaches to personalisation which solely optimise for user satisfaction are often encumbered by competing objectives and environmental constraints which are yet to be addressed jointly. In this work we set out to (i) formalise the general problem of personalisation in CPSS from a multi-stakeholder perspective taking into account the full environmental complexity, (ii) extend the general formalisation to the case of exhibition areas and propose a personalised Multi-stakeholder aware Recommendation and Guidance method on a case study of National Gallery, London 
 </p>
